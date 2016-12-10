@@ -6,69 +6,93 @@
 //prompts next question - 
 
 //win page / lose page? tally page?
-var counter = 
-var score = 
-var user choice = 
-var correctAnswer = 
+var counter = 0;
+var score = 0;
+var userChoice = ""; 
+var correctAnswer;
+var currentQuestion = 0; 
 
-var questions = [
+
+var trivia = [
 	
 	{
-		question: "What's in a Vodka Martini?"
-		answer: "cold vodka, dry vermouth"
-	},
-	
-	{
-		question: "What's in a Manhattan?"
-		answer: "whiskey, sweet vermouth"
-	},
+        question: "What's in a Vodka Martini?",
+        answers: {
+            1: "gin, sweet vermouth",
+            2: "vodka, soda",
+            3: "vodka, dry vermouth",
+            4: "vodka, sweet vermouth"
+        },
+        rightAnswer: 3
+    },
 
-	{
-		question: "What's in a Rusty Nail?"
-		answer: "scotch, drambuie"
-	},
+    {
+    	question: "What's in a Manhattan?",
+    	answers: {
+    		1: "whiskey, grenadine",
+    		2: "whiskey, sweet vermouth",
+    		3: "scotch, water",
+    		4: "scotch, soda"
+    	}, 
+    	rightAnswer: 2
+    }
 
-	{
-		question: "What's in a Long Island Iced Tea?"
-		answer: "crum, gin, vodka, tequila, triple sec, sour mix, cola"
-	},
+]
 
-	{
-		question: "What's in a Tom Collins?"
-		answer: "lemon, syrup, club soda"
-	},
+$(document).on("click", "#start", function showQuestion (id){
+	$("#displayQuestion").empty();	
 
-	{
-		question: "What's in a Old Fashioned?"
-		answer: "whiskey, sugar, bitters, orange"
-	},
+	$.each(trivia, function (key, value) {
 
-	{
-		question: "What's in a Bellini?"
-		answer: "prosecco/champagne, peach juice"
-	},
+	    $("#displayQuestion").text(key + ": " + value.question);
 
-	{
-		question: "What's in a Sex on the Beach?"
-		answer: "vodka, peach schnapps, creme de cassis, orange and cranberry juices"
-	},
 
-	{
-		question: "What's in a Margarita?"
-		answer: "tequila, triple sec, lime juice"
-	},
+	for (var i = 0; i < value.answers.length; i++)   
+	    $.each(value.answers, function (key, value) {
 
-	{
-		question: "What's in a Cosmopolitan?"
-		answer: "vodka, cranberry juice, cointreu, lime juice"
-	},
-] 
+	        $('<button>');
+	        	$('#displayAnswers').text(value);
 
-function(askaQuestion){
-	for (var i = 0; i < questions.length; i++){
-	$("#questions").text(questions[i]);
-	console.log(questions[i]);
-}	
-}
+	    	});
+		});    
+});
+
+// 	for (var i = 0; i < trivia; i++) 
+// 		$("#displayQuestion").text(trivia[i].question);
+
+// });
+// var random = Math.floor(Math.random) * (10-1) + 1; 
+// 		for (var i = 0; i < trivia.length; i++);
+// 	$("#answers").empty();
+	 
+// 	// for each answer
+
+// 	// append value to #answers
+
+// 	// make it look like this
+
+// 	// <li class="answerthequestion" data-rightanswer="1">name</li>
+// }
+
+//  $(document).on("click", "#start", function (){
+
+//  	console.log(" The current question is " + currentQuestion)
+//  	if (trivia.length == currentQuestion){
+//  		alert("Game Over");
+//  	}else{
+
+
+//  		showQuestion(currentQuestion);
+//  		currentQuestion = currentQuestion + 1; 
+//  	}
+ 	
+ // });
+// 	var question = Math.floor(Math.random() * (10 - 1) + 1) + 1;
+// 	// var question = Math.floor(Math.random() * 1) + 1;
+// 		for (var i = 0; i < trivia.length; i++){
+// 			$(".displayQuestion").append(trivia[i].question);
+// 			console.log();
+// 	}	
+// }
 
 
