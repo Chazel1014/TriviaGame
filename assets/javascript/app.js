@@ -39,14 +39,39 @@ var trivia = [
 
 window.onload = function startAlert(){
 	sweetAlert("You have five minutes to complete this quiz. Press the 'LET'S GO' button to get started!");
-}
 
+	function startTimer(duration, display) {
+	    var timer = duration, minutes, seconds;
+	    setInterval(function () {
+	        minutes = parseInt(timer / 60, 10)
+	        seconds = parseInt(timer % 60, 10);
+
+	        minutes = minutes < 10 ? "0" + minutes : minutes;
+	        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+	        display.text(minutes + ":" + seconds);
+
+	        if (--timer < 0) {
+	            timer = duration;
+	        }
+	    }, 1000);
+	}
+
+jQuery(function ($) {
+    var fiveMinutes = 60 * 5,
+        display = $('.countdown');
+    startTimer(fiveMinutes, display);
+});
+
+}
 
  // THIS FUNCTION WILL RUN EVERY TIME START BUTTON IS CLICKED*******
 var nextQuestion = function(){
 // WE CLEAR BOTH DIVS BEFORE DISPLAYING NEXT QUESTION*****
 		$("#displayQuestion").empty();
 		$("#displayAnswers").empty();
+
+	
 
 // USING THE questionNum VARIABLE, WE CAN CYCLE THROUGH EACH QUESTION OBJECT IN THE TRIVIA ARRAY*****
 		$("#displayQuestion").html("<h2>" + trivia[questionNum].question + "</h2>");
@@ -57,7 +82,7 @@ var nextQuestion = function(){
 			$("#displayAnswers").append("<p>" + "<button>" + trivia[questionNum].answers[i] + "</button>" + "</p>");
 
 		}
-// INCRIMENT questionNum SO THAT THE NEXT TIME THE FUNCTION IS CALLED WE GET THE NEXT QUESTION****
+// INCREMENT questionNum SO THAT THE NEXT TIME THE FUNCTION IS CALLED WE GET THE NEXT QUESTION****
 		questionNum++;
 
 // IF questionNum IS GREATER THAN AMOUNT OF QUESTIONS IN TRIVIA ARRAY, RUN THE END GAME FUNCTION
