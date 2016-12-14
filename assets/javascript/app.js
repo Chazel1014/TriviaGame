@@ -11,7 +11,11 @@
 // var userChoice = ""; 
 // var correctAnswer;
 // var currentQuestion = 0; 
+
 var questionNum = 0;
+// var userChoice = [0, 1, 2, 3];
+var correct = 0;
+var incorrect = 0;
 
 var trivia = [
 	
@@ -125,7 +129,7 @@ var trivia = [
 ];
 
 window.onload = function startAlert(){
-	
+
 	sweetAlert("You have five minutes to complete this quiz. Press the 'LET'S GO' button to get started!");
 
 		function startTimer(duration, display) {
@@ -155,6 +159,7 @@ window.onload = function startAlert(){
 
  // THIS FUNCTION WILL RUN EVERY TIME START BUTTON IS CLICKED*******
 var nextQuestion = function(){
+
 // WE CLEAR BOTH DIVS BEFORE DISPLAYING NEXT QUESTION*****
 		$("#displayQuestion").empty();
 		$("#displayAnswers").empty();
@@ -172,24 +177,29 @@ var nextQuestion = function(){
 
 // INCREMENT questionNum SO THAT THE NEXT TIME THE FUNCTION IS CALLED WE GET THE NEXT QUESTION****
 		questionNum++;
+}
+ 
+		
 
 // IF questionNum IS GREATER THAN AMOUNT OF QUESTIONS IN TRIVIA ARRAY, RUN THE END GAME FUNCTION
+		if (questionNum > trivia.length){
+			endGame();
+		}	
 
 // CREATE AN END GAME FUNCTION THAT DOES EVERYTHING YOU WANT TO DO WHEN THE GAME ENDS
 // CALL END GAME FUNCTION HERE
 
-		if (questionNum > trivia.length){
-			endGame();
+function endGame(reset){
+		clearInterval(timer);
+		$("#container").empty();
+		sweetAlert("DONE! Check your Totals:");
 		
-		}
+		}; 		
+		
 
-			function endGame(){ 
-				$("#timer").empty();
-				$("#mainContainer").empty();
-			}
-
-
-}
+			
+	// }
+	
 
 
 //on start, display first question
@@ -200,6 +210,9 @@ $('#start').on("click", function (){
 
 
 });
+
+
+
 
 	// //run through length of trivia to print selected question
 	// for (var i = 0; i < trivia.length; i++) {
