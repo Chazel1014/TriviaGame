@@ -11,7 +11,7 @@
 // var userChoice = ""; 
 // var correctAnswer;
 // var currentQuestion = 0; 
-
+var questionNum = 0;
 
 var trivia = [
 	
@@ -37,68 +37,80 @@ var trivia = [
 
 ];
 
+window.onload = function startAlert(){
+	sweetAlert("You have five minutes to complete this quiz. Press the 'LET'S GO' button to get started!");
+}
+
+
+ // THIS FUNCTION WILL RUN EVERY TIME START BUTTON IS CLICKED*******
+var nextQuestion = function(){
+// WE CLEAR BOTH DIVS BEFORE DISPLAYING NEXT QUESTION*****
+		$("#displayQuestion").empty();
+		$("#displayAnswers").empty();
+
+// USING THE questionNum VARIABLE, WE CAN CYCLE THROUGH EACH QUESTION OBJECT IN THE TRIVIA ARRAY*****
+		$("#displayQuestion").html("<h2>" + trivia[questionNum].question + "</h2>");
+
+// HERE, WE LOOP THROUGH EACH QUESTION IN THE SPECIFIC OBJECT DETERMINED BY questionNum VARIABLE*****
+		for (var i = 0; i < trivia[questionNum].answers.length ; i++) {
+// WE APPEND EACH QUESTION****
+			$("#displayAnswers").append("<p>" + "<button>" + trivia[questionNum].answers[i] + "</button>" + "</p>");
+
+		}
+// INCRIMENT questionNum SO THAT THE NEXT TIME THE FUNCTION IS CALLED WE GET THE NEXT QUESTION****
+		questionNum++;
+
+// IF questionNum IS GREATER THAN AMOUNT OF QUESTIONS IN TRIVIA ARRAY, RUN THE END GAME FUNCTION
+		if (questionNum > trivia.length) {
+			// CREATE AN END GAME FUNCTION THAT DOES EVERYTHING YOU WANT TO DO WHEN THE GAME ENDS
+			// CALL END GAME FUNCTION HERE
+
+			// endGame();
+
+		}
+}
+
 // var questions = trivia[i].question;
 // var choices = trivia[0].question.answers;
 
 //on start, display first question
-$(document).on("click", function (){
+$('#start').on("click", function (){
 
-	//run through length of trivia to print selected question
-	for (var i = 0; i < trivia.length; i++) {
+// NEXTQUESTION FUNCTION CALLED EVERY TIME BUTTON IS CLICKED**************
+	nextQuestion();
 
-		//empty div
-		$("#displayQuestion").empty();
 
-		var question = trivia[i].question;
+});
+	// //run through length of trivia to print selected question
+	// for (var i = 0; i < trivia.length; i++) {
+
+	// 	//empty div
+	// 	$("#displayQuestion").empty();
+
+	// 	var question = trivia[i].question;
 		
 
-		//print to html
-		$("#displayQuestion").html("<h2>" + question + "</h2>")
+	// 	//print to html
+	// 	$("#displayQuestion").html("<h2>" + question + "</h2>")
  
 
-	//assigns variable to find answers quicker 	
-	var choices = trivia[i].answers; 
+	// //assigns variable to find answers quicker 	
+	// var choices = trivia[i].answers; 
 		
-	//for loops over trivia.answers
-	for (var j = 0; j < choices.length; j++){
+	// //for loops over trivia.answers
+	// for (var j = 0; j < choices.length; j++){
 
-		//empty div
-		$("#displayAnswers").empty();
+	// 	//empty div
+	// 	$("#displayAnswers").empty();
 
-		//creates button per choice
-		var buttons = $('<button>').text(choices[j]).attr('class', 'btn').attr('data-value', choices[j].split);
+	// 	//creates button per choice
+	// 	var buttons = $('<button>').text(choices[j]).attr('class', 'btn').attr('data-value', choices[j].split);
 		
 
-		//appends buttons to displayAnswers div 
-		$("#displayAnswers").append(buttons);
-		}	
-	}
+	// 	//appends buttons to displayAnswers div 
+	// 	$("#displayAnswers").append(buttons);
+	// 	}	
+	// }
 	
-});
+
 // }); 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
